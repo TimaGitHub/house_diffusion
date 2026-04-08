@@ -47,6 +47,16 @@ pip install -e .
 2. Извлеките файлы: `rplan__8.npz`, `rplan_eval_8.npz`, `rplan_eval_8_syn.npz`, `rplan_train_8.npz`, `rplan_train_8_cndist.npz`.
 3. Поместите эти файлы в директорию: `scripts/processed_rplan/`.
 
+```
+Project/
+├── ckpts/
+└── house_diffusion/
+    ├── figs/
+    ├── house_diffusion/
+    └── scripts/
+        ├── processed_rplan/
+        └── image_sample.py
+```      
 ---
 
 ## 🚀 Использование
