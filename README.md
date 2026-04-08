@@ -13,7 +13,7 @@
     * Установите `msmpisetup.exe` (основная библиотека).
     * Установите `msmpisdk.msi` (пакет разработчика).
 4.  **Visual Studio Build Tools**: Необходимо установить компоненты для сборки C++.
-5.  **Visual C++ Redistributable**: Скачайте актуальную версию [здесь](https://aka.ms/vs/17/release/vc_redist.x64.exe).
+5.  **Visual C++ Redistributable**: Можно скачать версию [здесь](https://aka.ms/vs/17/release/vc_redist.x64.exe).
 6.  **Graphviz**: Скачайте и установите для корректной визуализации графов [отсюда](https://graphviz.org/download/).
 
 ### 2. Клонирование и установка зависимостей
@@ -26,7 +26,7 @@ git clone https://github.com/TimaGitHub/house_diffusion.git
 cd house_diffusion
 
 # Установка зависимостей с поддержкой CUDA
-pip install -r requirements.txt --extra-index-url [https://download.pytorch.org/whl/cu126](https://download.pytorch.org/whl/cu126)
+pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu126
 
 # Установка проекта в режиме редактирования
 pip install -e .
