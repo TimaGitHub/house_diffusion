@@ -31,11 +31,11 @@ def load_rplanhg_data(
     dataset = RPlanhgDataset(set_name, analog_bit, target_set)
     if deterministic:
         loader = DataLoader(
-            dataset, batch_size=batch_size, shuffle=False, num_workers=2, drop_last=False
+            dataset, batch_size=batch_size, shuffle=False, num_workers=0, drop_last=False
         )
     else:
         loader = DataLoader(
-            dataset, batch_size=batch_size, shuffle=True, num_workers=2, drop_last=False
+            dataset, batch_size=batch_size, shuffle=True, num_workers=0, drop_last=False
         )
     while True:
         yield from loader

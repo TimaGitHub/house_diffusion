@@ -1,63 +1,67 @@
-# HouseDiffusion
-**[HouseDiffusion: Vector Floorplan Generation via a Diffusion Model with Discrete and Continuous Denoising](https://arxiv.org/abs/2211.13287)**
-<img src='figs/teaser.png' width=100%>
-## Installation
-**1. Clone our repo and install the requirements:**
+# House Diffusion
 
-Our implementation is based on the public implementation of [guided-diffusion](https://github.com/openai/guided-diffusion). For installation instructions, please refer to their repository. Keep in mind that our current version has not been cleaned and some features from the original repository may not function correctly.
+## 🛠 Установка и настройка окружения
 
-```
-git clone https://github.com/aminshabani/house_diffusion.git
+Инструкция ориентирована на операционную систему Windows.
+
+### 1. Системные требования
+Перед установкой Python-пакетов необходимо подготовить системные компоненты:
+
+1.  **Python 3.10**: Убедитесь, что используете именно эту версию.
+2.  **GTK for Windows**: Скачайте и запустите [установщик GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
+3.  **Microsoft MPI**:
+    * Установите `msmpisetup.exe` (основная библиотека).
+    * Установите `msmpisdk.msi` (пакет разработчика).
+4.  **Visual Studio Build Tools**: Необходимо установить компоненты для сборки C++.
+5.  **Visual C++ Redistributable**: Скачайте актуальную версию [здесь](https://aka.ms/vs/17/release/vc_redist.x64.exe).
+6.  **Graphviz**: Скачайте и установите для корректной визуализации графов [отсюда](https://graphviz.org/download/).
+
+### 2. Клонирование и установка зависимостей
+
+Выполните следующие команды в терминале:
+
+```bash
+# Клонирование репозитория
+git clone [https://github.com/TimaGitHub/house_diffusion.git](https://github.com/TimaGitHub/house_diffusion.git)
 cd house_diffusion
-pip install -r requirements.txt
+
+# Установка зависимостей с поддержкой CUDA
+pip install -r requirements.txt --extra-index-url [https://download.pytorch.org/whl/cu126](https://download.pytorch.org/whl/cu126)
+
+# Установка проекта в режиме редактирования
 pip install -e .
 ```
-**2. Download the dataset and create the datasets directory**
 
-- You can download the datasets from [RPLAN's website](http://staff.ustc.edu.cn/~fuxm/projects/DeepLayout/index.html) or by filling [this](https://docs.google.com/forms/d/e/1FAIpQLSfwteilXzURRKDI5QopWCyOGkeb_CFFbRwtQ0SOPhEg0KGSfw/viewform) form.
-- We also use data preprocessing from House-GAN++ which you can find in [this](https://github.com/sepidsh/Housegan-data-reader) link.
-Put all of the processed files from the downloaded dataset in a `datasets` folder in the current directory:
+---
 
+## 📂 Подготовка данных и весов
+
+Для работы модели необходимо разместить файлы в соответствующих папках.
+
+### Веса модели (Checkpoints)
+1. Скачайте файл `model250000.pt` по [ссылке](https://drive.google.com/file/d/16zKmtxwY5lF6JE-CJGkRf3-OFoD1TrdR/view).
+2. Поместите его в директорию: `ckpts/exp/`.
+
+### Набор данных (Dataset)
+1. Скачайте данные по [ссылке](https://drive.google.com/file/d/12lfJ8cxRs5gbjeDbPdk1AhQQdpa4GXlX/view?usp=drive_link).
+2. Извлеките файлы: `rplan__8.npz`, `rplan_eval_8.npz`, `rplan_eval_8_syn.npz`, `rplan_train_8.npz`, `rplan_train_8_cndist.npz`.
+3. Поместите эти файлы в директорию: `scripts/processed_rplan/`.
+
+---
+
+## 🚀 Использование
+
+### Генерация планировок
+Перейдите в папку со скриптами и запустите генерацию:
+
+```bash
+cd scripts
+python image_sample.py --dataset rplan --batch_size 16 --model_path ../ckpts/exp/model250000.pt --num_samples 10000 --target_set 8 --save_svg True --set_name eval
 ```
-house_diffusion
-├── datasets
-│   ├── rplan
-|   |   └── 0.json
-|   |   └── 1.json
-|   |   └── ...
-|   └── ...
-└── guided_diffusion
-└── scripts
-└── ...
-```
-- We have provided a temporary model that you can download from [Google Drive](https://drive.google.com/file/d/16zKmtxwY5lF6JE-CJGkRf3-OFoD1TrdR/view?usp=share_link).
 
-> **NOTE:** We have recently received many requests regarding issues with downloading the RPLAN dataset. If you are looking for an alternative, we highly recommend using the **MagicPlan** dataset provided in our [PuzzleFusion](https://github.com/sepidsh/PuzzleFussion?tab=readme-ov-file#magicplan) paper. MagicPlan is a real-world dataset of room layouts constructed via AR, and the link includes both the data and the necessary reader.
+### Визуальная проверка
+Для сравнения и просмотра полученных результатов запустите:
 
-## Running the code
-
-**1. Training**
-
-You can run a single experiment using the following command:
-```
-python image_train.py --dataset rplan --batch_size 32 --set_name train --target_set 8
-```
-**2. Sampling**
-To sample floorplans, you can run the following command from inside of the `scripts` directory. To provide different visualizations, please see the `save_samples` function from `scripts/image_sample.py`
-
-```
-python image_sample.py --dataset rplan --batch_size 32 --set_name eval --target_set 8 --model_path ckpts/exp/model250000.pt --num_samples 64
-```
-You can also run the corresponding code from `scripts/script.sh`. 
-
-
-## Citation
-
-```
-@article{shabani2022housediffusion,
-  title={HouseDiffusion: Vector Floorplan Generation via a Diffusion Model with Discrete and Continuous Denoising},
-  author={Shabani, Mohammad Amin and Hosseini, Sepidehsadat and Furukawa, Yasutaka},
-  journal={arXiv preprint arXiv:2211.13287},
-  year={2022}
-}
+```bash
+python visual_check.py
 ```

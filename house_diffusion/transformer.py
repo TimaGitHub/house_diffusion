@@ -47,7 +47,7 @@ def attention(q, k, v, d_k, mask=None, dropout=None):
     scores = th.matmul(q, k.transpose(-2, -1)) /  math.sqrt(d_k)
     if mask is not None:
         mask = mask.unsqueeze(1)
-        scores = scores.masked_fill(mask == 1, -1e9)
+        scores = scores.masked_fill(mask.to(scores.device) == 1, -1e9)
     scores = F.softmax(scores, dim=-1)
     if dropout is not None:
         scores = dropout(scores)
@@ -226,6 +226,7 @@ class TransformerModel(nn.Module):
         x = x.permute([0, 2, 1]).float() # -> convert [N x C x S] to [N x S x C]
 
         if not self.analog_bit:
+            prefix = ''
             x = self.expand_points(x, kwargs[f'{prefix}connections'])
 
         # Different input embeddings (Input, Time, Conditions) 
@@ -239,7 +240,7 @@ class TransformerModel(nn.Module):
                     cond = kwargs[key]
                 else:
                     cond = th.cat((cond, kwargs[key]), 2)
-            cond_emb = self.condition_emb(cond.float())
+            cond_emb = self.condition_emb(cond.to(self.condition_emb.weight.device).float())
 
         # PositionalEncoding and DM model
         out = input_emb + cond_emb + time_emb.repeat((1, input_emb.shape[1], 1))
