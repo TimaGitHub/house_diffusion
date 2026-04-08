@@ -66,7 +66,19 @@ Project/
 
 ```bash
 cd scripts
-python image_sample.py --dataset rplan --batch_size 16 --model_path ../ckpts/exp/model250000.pt --num_samples 10000 --target_set 8 --save_svg True --set_name eval
+python image_sample.py --dataset rplan --batch_size 16 --model_path ../../ckpts/exp/model250000.pt --num_samples 10000 --target_set 8 --save_svg True --set_name eval
+```
+
+Получится примерно такая информация
+
+```markdown
+
+Итоговые средние метрики (по 1 прогонам):
+Diversity (FID с дверьми) mean: 22.2651          std: 0.0000
+Diversity (FID без дверей) mean: 12.6087         std: 0.0000
+Compatibility mean: 2.4375       std: 0.0000
+Overall Micro-IoU mean: 0.1707
+Overall Macro-IoU mean: 0.0904
 ```
 
 ### Визуальная проверка
@@ -75,3 +87,6 @@ python image_sample.py --dataset rplan --batch_size 16 --model_path ../ckpts/exp
 ```bash
 python visual_check.py
 ```
+
+<img width="1692" height="959" alt="image" src="https://github.com/user-attachments/assets/052e6b64-4765-4285-8862-0c094a35d064" />
+
