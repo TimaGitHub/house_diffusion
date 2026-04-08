@@ -22,7 +22,7 @@
 
 ```bash
 # Клонирование репозитория
-git clone [https://github.com/TimaGitHub/house_diffusion.git](https://github.com/TimaGitHub/house_diffusion.git)
+git clone https://github.com/TimaGitHub/house_diffusion.git
 cd house_diffusion
 
 # Установка зависимостей с поддержкой CUDA
