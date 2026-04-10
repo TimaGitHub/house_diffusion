@@ -101,7 +101,7 @@ def get_graph(indx, g_true, ID_COLOR, draw_graph, save_svg):
             pos = nx.nx_agraph.graphviz_layout(G_true, prog='neato')
         except:
             pos = nx.spring_layout(G_true)
-            print("Graphviz failed, falling back to spring_layout")
+            # print("Graphviz failed, falling back to spring_layout")
         nx.draw(G_true, pos, node_size=node_size, linewidths=linewidths, node_color=colors_H, font_size=14, font_color='white',\
                 font_weight='bold', edgecolors=edgecolors, width=4.0, with_labels=False)
         if save_svg:
