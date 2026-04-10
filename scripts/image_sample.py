@@ -102,8 +102,14 @@ def get_graph(indx, g_true, ID_COLOR, draw_graph, save_svg):
         except:
             pos = nx.spring_layout(G_true)
             # print("Graphviz failed, falling back to spring_layout")
-        nx.draw(G_true, pos, node_size=node_size, linewidths=linewidths, node_color=colors_H, font_size=14, font_color='white',\
-                font_weight='bold', edgecolors=edgecolors, width=4.0, with_labels=False)
+        try:
+            nx.draw(G_true, pos, node_size=node_size, linewidths=linewidths, node_color=colors_H, font_size=14,
+                    font_color='white', \
+                    font_weight='bold', edgecolors=edgecolors, width=4.0, with_labels=False)
+
+        except Exception as e:
+            print(f"[Warning] Skipping graph drawing for index {indx} due to error: {e}")
+            
         if save_svg:
             plt.savefig(f'outputs/graphs_gt/{indx}.svg')
             plt.savefig(f'outputs/graphs_gt/{indx}.jpg')
