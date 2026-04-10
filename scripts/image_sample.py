@@ -202,7 +202,16 @@ def estimate_graph(indx, polys, nodes, G_gt, ID_COLOR, draw_graph, save_svg):
             pos = nx.spring_layout(G_estimated_complete)
             # print("Graphviz failed, falling back to spring_layout")
         weights = [4 for u, v in G_estimated_complete.edges()]
-        nx.draw(G_estimated_complete, pos, edge_color=colors, linewidths=linewidths, edgecolors=edgecolors, node_size=node_size, node_color=colors_H, font_size=14, font_weight='bold', font_color='white', width=weights, with_labels=False)
+        # nx.draw(G_estimated_complete, pos, edge_color=colors, linewidths=linewidths, edgecolors=edgecolors, node_size=node_size, node_color=colors_H, font_size=14, font_weight='bold', font_color='white', width=weights, with_labels=False)
+        
+        try:
+            nx.draw(G_estimated_complete, pos, edge_color=colors, linewidths=linewidths, edgecolors=edgecolors,
+                    node_size=node_size, node_color=colors_H, font_size=14, font_weight='bold', font_color='white',
+                    width=weights, with_labels=False)
+
+        except Exception as e:
+            print(f"[Warning] Skipping graph drawing for index {indx} due to error: {e}")
+            
         if save_svg:
             plt.savefig(f'outputs/graphs_pred/{indx}.svg')
             plt.savefig(f'outputs/graphs_pred/{indx}.jpg')
