@@ -66,7 +66,7 @@ Project/
 
 ```bash
 cd scripts
-python image_sample.py --dataset rplan --batch_size 16 --model_path ../../ckpts/exp/model250000.pt --num_samples 10000 --target_set 8 --save_svg True --set_name eval
+python image_sample.py --dataset rplan --batch_size 16 --model_path ../../ckpts/exp/model250000.pt --num_samples 18848 --target_set 8 --save_svg True --set_name eval
 ```
 
 Получится примерно такая информация
