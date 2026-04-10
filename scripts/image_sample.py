@@ -441,7 +441,7 @@ def main():
             for key in model_kwargs:
                 model_kwargs[key] = model_kwargs[key]
 
-            model_kwargs['is_syn'] = True
+            # model_kwargs['is_syn'] = True
             
             sample = sample_fn(
                 model,
