@@ -226,6 +226,7 @@ class TransformerModel(nn.Module):
         x = x.permute([0, 2, 1]).float() # -> convert [N x C x S] to [N x S x C]
 
         if not self.analog_bit:
+            prefix = ''
             x = self.expand_points(x, kwargs[f'{prefix}connections'])
 
         # Different input embeddings (Input, Time, Conditions) 
