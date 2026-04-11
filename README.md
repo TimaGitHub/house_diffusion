@@ -74,11 +74,11 @@ python image_sample.py --dataset rplan --batch_size 16 --model_path ../../ckpts/
 ```markdown
 
 Итоговые средние метрики (по 1 прогонам):
-Diversity (FID с дверьми) mean: 22.2651          std: 0.0000
-Diversity (FID без дверей) mean: 12.6087         std: 0.0000
-Compatibility mean: 2.4375       std: 0.0000
-Overall Micro-IoU mean: 0.1707
-Overall Macro-IoU mean: 0.0904
+Diversity (FID с дверьми) mean: 2.9960   std: 0.0000
+Diversity (FID без дверей) mean: 2.5325          std: 0.0000
+Compatibility mean: 2.5101       std: 0.0000
+Overall Micro-IoU mean: 0.1688
+Overall Macro-IoU mean: 0.0891
 ```
 
 ### Визуальная проверка
